@@ -125,7 +125,6 @@ DROP TABLE IF EXISTS `mydb`.`Products_has_Colors` ;
 CREATE TABLE IF NOT EXISTS `mydb`.`Products_has_Colors` (
   `Products_ProdId` VARCHAR(10) NOT NULL,
   `Colors_ColorId` VARCHAR(10) NOT NULL,
-  `Quantity` INT(5) NOT NULL,
   PRIMARY KEY (`Products_ProdId`, `Colors_ColorId`),
   INDEX `fk_Products_has_Colors1_Colors1_idx` (`Colors_ColorId` ASC) VISIBLE,
   INDEX `fk_Products_has_Colors1_Products1_idx` (`Products_ProdId` ASC) VISIBLE,
