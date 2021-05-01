@@ -34,7 +34,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`Products` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Products` (
-  `ProdId` VARCHAR(10) NOT NULL,
+  `ProdId` INT(5) NOT NULL AUTO_INCREMENT,
   `ProdName` VARCHAR(45) NOT NULL,
   `Description` VARCHAR(300) NOT NULL,
   `Price` DOUBLE(8,2) NOT NULL,
@@ -66,88 +66,14 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Products_has_Colors`
+-- Table `mydb`.`Products_Colors`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Products_has_Colors` ;
+DROP TABLE IF EXISTS `mydb`.`Products_Colors` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Products_has_Colors` (
-  `Products_ProdId` VARCHAR(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `mydb`.`Products_Colors` (
+  `Products_ProdId` INT(5) NOT NULL AUTO_INCREMENT,
   `Colors_ColorId` VARCHAR(10) NOT NULL,
-  PRIMARY KEY (`Colors_ColorId`, `Products_ProdId`),
-  INDEX `fk_Products_has_Colors1_Colors1_idx` (`Colors_ColorId` ASC) VISIBLE,
-  INDEX `fk_Products_has_Colors1_Products1_idx` (`Products_ProdId` ASC) VISIBLE,
-  CONSTRAINT `fk_Products_has_Colors1_Products1`
-    FOREIGN KEY (`Products_ProdId`)
-    REFERENCES `mydb`.`Products` (`ProdId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Products_has_Colors1_Colors1`
-    FOREIGN KEY (`Colors_ColorId`)
-    REFERENCES `mydb`.`Colors` (`ColorId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`Brands`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Brands` ;
-
-CREATE TABLE IF NOT EXISTS `mydb`.`Brands` (
-  `BrandId` VARCHAR(10) NOT NULL,
-  `BrandName` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`BrandId`),
-  UNIQUE INDEX `BrandName_UNIQUE` (`BrandName` ASC) VISIBLE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`Products`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Products` ;
-
-CREATE TABLE IF NOT EXISTS `mydb`.`Products` (
-  `ProdId` VARCHAR(10) NOT NULL,
-  `ProdName` VARCHAR(45) NOT NULL,
-  `Description` VARCHAR(300) NOT NULL,
-  `Price` DOUBLE(8,2) NOT NULL,
-  `Date` DATE NOT NULL,
-  `Image` VARCHAR(45) NOT NULL,
-  `Brands_BrandId` VARCHAR(10) NOT NULL,
-  PRIMARY KEY (`ProdId`, `Brands_BrandId`),
-  UNIQUE INDEX `ProdName_UNIQUE` (`ProdName` ASC) VISIBLE,
-  INDEX `fk_Products_Brands1_idx` (`Brands_BrandId` ASC) VISIBLE,
-  CONSTRAINT `fk_Products_Brands1`
-    FOREIGN KEY (`Brands_BrandId`)
-    REFERENCES `mydb`.`Brands` (`BrandId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`Colors`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Colors` ;
-
-CREATE TABLE IF NOT EXISTS `mydb`.`Colors` (
-  `ColorId` VARCHAR(10) NOT NULL,
-  `ColorName` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`ColorId`),
-  UNIQUE INDEX `ColorName_UNIQUE` (`ColorName` ASC) VISIBLE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`Products_has_Colors`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Products_has_Colors` ;
-
-CREATE TABLE IF NOT EXISTS `mydb`.`Products_has_Colors` (
-  `Products_ProdId` VARCHAR(10) NOT NULL,
-  `Colors_ColorId` VARCHAR(10) NOT NULL,
-  PRIMARY KEY (`Colors_ColorId`, `Products_ProdId`),
+  PRIMARY KEY (`Products_ProdId`, `Colors_ColorId`),
   INDEX `fk_Products_has_Colors1_Colors1_idx` (`Colors_ColorId` ASC) VISIBLE,
   INDEX `fk_Products_has_Colors1_Products1_idx` (`Products_ProdId` ASC) VISIBLE,
   CONSTRAINT `fk_Products_has_Colors1_Products1`
